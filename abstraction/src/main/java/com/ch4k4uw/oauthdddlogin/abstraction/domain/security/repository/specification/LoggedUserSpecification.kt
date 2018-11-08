@@ -1,0 +1,6 @@
+package com.ch4k4uw.oauthdddlogin.abstraction.domain.security.repository.specification
+
+import com.ch4k4uw.oauthdddlogin.abstraction.domain.base.repository.specification.ByLongIdRepositorySpecification
+import com.ch4k4uw.oauthdddlogin.abstraction.domain.security.entity.UserEntity
+
+interface LoggedUserSpecification: ByLongIdRepositorySpecification<UserEntity>

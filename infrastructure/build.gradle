@@ -1,0 +1,106 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def configsFile = rootProject.file("configs.properties")
+def configsProperties = new Properties()
+configsProperties.load(new FileInputStream(configsFile))
+
+android {
+    ext.configs = [
+            oauth_grant_type: configsProperties['oauth_grant_type'],
+            oauth_refresh_grant_type: configsProperties['oauth_refresh_grant_type'],
+            oauth_client_id: configsProperties['oauth_client_id'],
+            oauth_client_secret: configsProperties['oauth_client_secret'],
+            oauth_scope: configsProperties['oauth_scope'],
+            oauth_user: configsProperties['oauth_user'],
+            oauth_pass: configsProperties['oauth_pass'],
+            server_host: configsProperties['server_host']
+    ]
+
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        resValue "bool", "enable_db_mainthread_access", "false"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    testBuildType "debugTest"
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debugTest {
+            initWith debug
+            resValue "string", "oauth_grant_type", configs.oauth_grant_type
+            resValue "string", "oauth_refresh_grant_type", configs.oauth_refresh_grant_type
+            resValue "string", "oauth_client_id", configs.oauth_client_id
+            resValue "string", "oauth_client_secret", configs.oauth_client_secret
+            resValue "string", "oauth_scope", configs.oauth_scope
+            resValue "string", "oauth_user", configs.oauth_user
+            resValue "string", "oauth_pass", configs.oauth_pass
+            resValue "string", "server_host", configs.server_host
+            resValue "bool", "enable_db_mainthread_access", "true"
+        }
+    }
+
+    testOptions.unitTests.includeAndroidResources true
+
+}
+
+android.buildTypes.all {
+    def aptOutputDir = new File(buildDir, "generated/source/apt/${it.name}")
+    android.sourceSets.add {
+        "${it.name}" {
+            res.srcDir = aptOutputDir
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxjava"
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+    implementation "androidx.room:room-runtime:$versions.room"
+    implementation "androidx.room:room-rxjava2:$versions.room"
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    implementation "com.annimon:stream:1.2.1"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:$versions.mockito"
+    testImplementation 'org.robolectric:robolectric:4.0.1'
+    testImplementation "androidx.room:room-testing:$versions.room"
+    testImplementation "com.google.dagger:dagger:$versions.dagger"
+    testImplementation 'androidx.test:core:1.0.0'
+    testImplementation 'androidx.test:monitor:1.1.0'
+
+    kapt "androidx.room:room-compiler:$versions.room"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+
+    kaptTest "com.google.dagger:dagger-compiler:$versions.dagger"
+    kaptTest "com.google.dagger:dagger-android-processor:$versions.dagger"
+
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
+    implementation project(':abstraction')
+    implementation project(':scope')
+
+}

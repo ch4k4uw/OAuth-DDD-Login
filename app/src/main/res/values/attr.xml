@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="logoutButtonStyle" format="reference" />
+    <attr name="loginButtonStyle" format="reference" />
+    <attr name="textInputLayoutStyle" format="reference" />
+    <attr name="checkBoxStyle" format="reference" />
+</resources>

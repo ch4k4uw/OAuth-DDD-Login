@@ -1,0 +1,13 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':abstraction')
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

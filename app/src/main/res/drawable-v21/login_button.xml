@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/login_button_pressed">
+    <item>
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:drawable="@drawable/login_button_disabled" android:state_enabled="false" />
+            <item>
+                <shape>
+                    <padding android:padding="1dp" />
+                    <corners android:radius="@dimen/profile_panel_corner" />
+                    <solid android:color="@color/login_button_normal" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

@@ -1,0 +1,5 @@
+package com.ch4k4uw.oauthdddlogin.infrastructure.domain.security.repository.specification
+
+import com.ch4k4uw.oauthdddlogin.abstraction.domain.security.repository.specification.LoggedUserSpecification
+
+class SimpleLoggedUserSpecification: LoggedUserSpecification

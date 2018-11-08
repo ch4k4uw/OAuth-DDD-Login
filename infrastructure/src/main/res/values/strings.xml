@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">infrastructure</string>
+    <string name="gson_date_format">yyyy-MM-dd\'T\'HH:mm:ssZ</string>
+</resources>

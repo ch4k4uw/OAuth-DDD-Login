@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="loginButtonStyle">@style/LoginButtonStyle</item>
+        <item name="logoutButtonStyle">@style/LogoutButtonStyle</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="textInputLayoutStyle">@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense</item>
+        <item name="checkboxStyle">@style/Widget.MaterialComponents.CompoundButton.CheckBox</item>
+    </style>
+
+    <style name="AuthButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:textColor">#cfff</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">@dimen/profile_panel_corner</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <style name="LoginButtonStyle" parent="AuthButtonStyle">
+        <item name="backgroundTint">@color/login_button</item>
+    </style>
+
+    <style name="LogoutButtonStyle" parent="AuthButtonStyle">
+        <item name="backgroundTint">@color/logout_button</item>
+        <item name="cornerRadius">0dp</item>
+    </style>
+
+</resources>
